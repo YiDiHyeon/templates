@@ -1,7 +1,6 @@
 "use client";
 
-import { log } from "console";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 type TMember = {
   id: string;
