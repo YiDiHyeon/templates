@@ -19,11 +19,12 @@ export default function MemberList() {
       const response = await fetch("/api/member", {
         method: "GET",
         headers: new Headers({
-            "Content-Type": "application/json",
-            "custom-error-status": "true",
-            "time-out-value" : '3000'
+          "Content-Type": "application/json",
+          // "custom-error-status": "true",
+          // "time-out-value" : '3000'
         }),
       });
+
       try {
         const { data } = await response.json();
         setMembers(data?.members || []);
