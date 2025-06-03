@@ -1,0 +1,19 @@
+{
+  "menus": [
+    {
+      "id": 0,
+      "name": "Main",
+      "path": "/"
+    },
+    {
+      "id": 1,
+      "name": "Zustand",
+      "path": "/zustand"
+    },
+    {
+      "id": 2,
+      "name": "Axios",
+      "path": "/axios"
+    }
+  ]
+}
