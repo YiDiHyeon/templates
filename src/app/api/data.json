@@ -1,0 +1,22 @@
+{
+  "members": [
+    {
+      "id": "0",
+      "name": "관리자",
+      "age": 20,
+      "email": "master@templates.com"
+    },
+    {
+      "id": "1",
+      "name": "홍길동",
+      "age": 20,
+      "email": "hong@gmail.com"
+    },
+    {
+      "id": "2",
+      "name": "이순신",
+      "age": 22,
+      "email": "lee@gmail.com"
+    }
+  ]
+}
