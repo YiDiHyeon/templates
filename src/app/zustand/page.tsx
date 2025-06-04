@@ -1,4 +1,3 @@
-import Image from "next/image";
 import MemberList from "./MemberList.client";
 
 export default function ZustandPage() {

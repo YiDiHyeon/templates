@@ -17,6 +17,12 @@
       "name": "이순신",
       "age": 22,
       "email": "lee@gmail.com"
+    },
+    {
+      "id": "3",
+      "name": "스티잡스",
+      "age": 50,
+      "email": "sj@gmail.com"
     }
   ]
 }

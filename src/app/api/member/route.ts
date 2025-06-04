@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
     }
 
     return Response.json(
-      { data },
+      { contents: data.members },
       {
         status: 200,
         headers: {
