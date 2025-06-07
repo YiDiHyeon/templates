@@ -25,8 +25,8 @@ export default function MemberList() {
       });
 
       try {
-        const { data } = await response.json();
-        setMembers(data?.members || []);
+        const { contents } = await response.json();
+        setMembers(contents || []);
       } catch (e) {
         console.log(e);
       }
