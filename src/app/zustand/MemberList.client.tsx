@@ -1,61 +1,49 @@
 "use client";
 
-import { customFetch } from "@/utils/customFetch";
 import { useEffect, useState } from "react";
-
-type TMember = {
-  id: string;
-  name: string;
-  age: number;
-  email: string;
-};
+import { TMember } from "@/types/members";
+import { getMember, updateMember } from "@/app/api/member/member";
 
 export default function MemberList() {
   const [members, setMembers] = useState<TMember[]>([]);
+  const [activeMemberId, setActiveMemberId] = useState<string | number | null>(
+    null
+  );
 
-  const updateMember = async () => {
-    const postMember = customFetch<{ contents: TMember }>("/api/memberDetail", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: {
-        name: "이지현",
-        age: 30,
-        email: "d22_22b@naver.com",
-      },
-    });
+  const handleClickUpdateMember = async () => {
+    const updateMemberInfo = {
+      name: "이지현",
+      age: 30,
+      email: "d22_22b@naver.com",
+    };
+
     try {
-      const result = await postMember(1);
-      const updatedMember = result.contents;
-      setMembers((prevMembers) =>
-        prevMembers.map((member) =>
+      const result = await updateMember(1, updateMemberInfo);
+      const updatedMember = result.contents ?? result;
+
+      setMembers((prev) =>
+        prev.map((member) =>
           member.id === updatedMember.id
             ? { ...member, ...updatedMember }
             : member
         )
       );
+
+      setActiveMemberId(updatedMember.id);
     } catch (err) {
       console.error("에러 발생", err);
     }
   };
+
   useEffect(() => {
     // 회원 상세 정보 가져오기
     const fetchMember = async () => {
-      const getMember = customFetch<TMember>("/api/memberDetail", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
       try {
-        const result = await getMember(1); // pathParam
-        const result2 = await getMember(undefined, { id: 1 }); // query string
-        const result3 = await getMember(1, { id: 1 }); // query string
-        console.log("결과1", result);
+        const result1 = await getMember(1);
+        const result2 = await getMember(2);
+
+        console.log("결과1", result1);
         console.log("결과2", result2);
-        console.log("결과3", result3);
       } catch (err) {
         console.error("에러 발생", err);
       }
@@ -100,7 +88,7 @@ export default function MemberList() {
               cursor: "pointer",
               color: "#333",
             }}
-            onClick={updateMember}
+            onClick={handleClickUpdateMember}
           >
             회원 정보 변경
           </button>
@@ -108,7 +96,11 @@ export default function MemberList() {
             <div
               key={member.id}
               style={{
-                border: "1px solid #ccc",
+                border:
+                  member.id === activeMemberId
+                    ? "2px solid #0070f3"
+                    : "1px solid #ccc",
+
                 padding: "12px",
                 borderRadius: "8px",
               }}
